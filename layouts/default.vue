@@ -19,6 +19,5 @@ export default  {
  //$
  .default-layout {
    background-color: #000;
-   min-height: 100vh;
  }
 </style>

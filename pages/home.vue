@@ -1,6 +1,12 @@
 <template>
-  <div class="text-3xl font-bold">
-    home page
+  <div class="home">
+    <div class="night-back">
+      <div class="night">
+        <div class="shooting_star" v-for="i in 20" :key="i"></div>
+      </div>
+    </div>
+
+    <div class="text-white">하이</div>
   </div>
 </template>
 
@@ -8,6 +14,127 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+//$
+  $shooting-time: 3000ms;
+  .home {
+    width: 100%;
+    background-color: #000;
+  }
 
+  .night-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+
+    .night {
+      position: relative;
+      left: 10%;
+      width: 80%;
+      height: 100%;
+      transform: rotateZ(45deg);
+    }
+
+    .shooting_star {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(-45deg, rgb(214, 199, 241), rgba(0, 0, 255, 0));
+      border-radius: 999px;
+      filter: drop-shadow(0 0 6px rgb(185, 157, 248));
+      animation:
+          tail $shooting-time ease-in-out infinite,
+          shooting $shooting-time ease-in-out infinite;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: calc(50% - 1px);
+        right: 0;
+        height: 2px;
+        background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(186, 145, 255, 1), rgba(0, 0, 255, 0));
+        transform: translateX(50%) rotateZ(45deg);
+        border-radius: 100%;
+        animation: shining $shooting-time ease-in-out infinite;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: calc(50% - 1px);
+        right: 0;
+        height: 2px;
+        background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(186, 145, 255, 1), rgba(0, 0, 255, 0));
+        transform: translateX(50%) rotateZ(45deg);
+        border-radius: 100%;
+        animation: shining $shooting-time ease-in-out infinite;
+        transform: translateX(50%) rotateZ(-45deg);
+      }
+
+      @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+          $delay: random(9999) + 0ms;
+          top: calc(50% - #{random(300) - 200px});
+          left: calc(50% - #{random(500) + 0px});
+          animation-delay: $delay;
+
+          &::before,
+          &::after {
+            animation-delay: $delay;
+          }
+        }
+      }
+    }
+  }
+
+
+  @keyframes tail {
+    0% {
+      width: 0;
+    }
+
+    30% {
+      width: 100px;
+    }
+
+    100% {
+      width: 0;
+    }
+  }
+
+  @keyframes shining {
+    0% {
+      width: 0;
+    }
+
+    50% {
+      width: 30px;
+    }
+
+    100% {
+      width: 0;
+    }
+  }
+
+  @keyframes shooting {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(300px);
+    }
+  }
+
+  @keyframes sky {
+    0% {
+      transform: rotate(45deg);
+    }
+
+    100% {
+      transform: rotate(45 + 360deg);
+    }
+  }
 </style>

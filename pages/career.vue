@@ -1,10 +1,15 @@
 <template>
-<div>career</div>
+<div @click.stop="clickCareer">career</div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-name: "career"
+  name: "career",
+  methods: {
+    clickCareer() {
+      console.warn("eeee");
+    }
+  }
 }
 </script>
 

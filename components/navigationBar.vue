@@ -11,6 +11,11 @@
 </template>
 
 <script lang="ts">
+export interface IMenu {
+  name: string;
+  to: string;
+}
+
 export default {
   name: "navigationBar",
   data() {
@@ -20,9 +25,9 @@ export default {
         { name: 'resume', to: '/resume' },
         { name: '포트폴리오', to: '/portfolio' },
         { name: '경력기술서', to: '/career' },
-        { name: 'github', to: '/home' },
-      ],
-      active: '/'+this.$route.name
+        { name: 'github', to: 'https://github.com/hyunjss' },
+      ] as IMenu[],
+      active: '/'+this.$route.name as string
     }
   }
 }
